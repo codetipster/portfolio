@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install
+      - name: install node packages
         run: npm install
       - name: lint
         run: npm run lint
       - name: test
-        run: npm       
+        run: npm run test -- --verbose 2>&1 | tee test.log      
