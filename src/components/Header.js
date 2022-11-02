@@ -1,15 +1,13 @@
 import { Fragment } from 'react'
+import {NavLink} from 'react-router-dom'
 import { Popover, Transition } from '@headlessui/react'
 import {
   ArrowPathIcon,
   Bars3Icon,
-  BookmarkSquareIcon,
-  CalendarIcon,
   ChartBarIcon,
   CursorArrowRaysIcon,
   LifebuoyIcon,
   PhoneIcon,
-  PlayIcon,
   ShieldCheckIcon,
   Squares2X2Icon,
   XMarkIcon,
@@ -18,55 +16,44 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import personal from '../assets/personal.jpg'
 const projects = [
   {
-    name: 'Analytics',
+    name: 'The Deepfake Experiment',
     description: 'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
+    name: 'My Portfolio',
     description: 'Speak directly to your customers in a more meaningful way.',
     href: '#',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Security', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
+  { name: 'Welcomeme.de', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
   {
-    name: 'Integrations',
+    name: 'Berlin Bukha',
     description: "Connect with third-party tools that you're already using.",
     href: '#',
     icon: Squares2X2Icon,
   },
   {
-    name: 'Automations',
+    name: 'Gigstreet',
     description: 'Build strategic funnels that will drive your customers to convert',
     href: '#',
     icon: ArrowPathIcon,
   },
 ]
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  
+  { name: 'Get in Touch', href: '#', icon: PhoneIcon },
 ]
 const resources = [
   {
-    name: 'Help Center',
+    name: 'See all Projects',
     description: 'Get all of your questions answered in our forums or contact support.',
     href: '#',
     icon: LifebuoyIcon,
   },
-  {
-    name: 'Guides',
-    description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
-    icon: BookmarkSquareIcon,
-  },
-  {
-    name: 'Events',
-    description: 'See what meet-ups and other events we might be planning near you.',
-    href: '#',
-    icon: CalendarIcon,
-  },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
+  
+  { name: 'Store', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
 ]
 const recentPosts = [
   { id: 1, name: 'Boost your conversion rate', href: '#' },
@@ -249,15 +236,21 @@ const Header = (props) => {
             </Popover>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <a href="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              Sign in
-            </a>
-            <a
-              href="#"
-              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+            <NavLink to="/login" /*className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" */
+            className={({isActive}) => {
+              return "whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" + (isActive ? "whitespace-nowrap ml-8 inline-flex font-medium rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-white" : ' ml-8 px-4 py-2 text-gray-800')
+            }}>
+              Login
+            </NavLink>
+            <NavLink
+              to="/signup"
+              className={({isActive}) => {
+                return "whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900" + (isActive ? "whitespace-nowrap ml-8 inline-flex font-medium rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-white" : 'ml-8 px-4 py-2 text-gray-800')
+              }}
+              /*className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"*/
             >
               Sign up
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -277,9 +270,9 @@ const Header = (props) => {
               <div className="flex items-center justify-between">
                 <div>
                   <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
+                    className="h-8 w-auto rounded-full"
+                    src={personal}
+                    alt="My image"
                   />
                 </div>
                 <div className="-mr-2">
@@ -307,7 +300,7 @@ const Header = (props) => {
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  About
+                  About Me
                 </a>
 
                 <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
@@ -331,7 +324,7 @@ const Header = (props) => {
                   Sign up
                 </a>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?{' '}
+                  Already have an account?{' '}
                   <a href="#" className="text-indigo-600 hover:text-indigo-500">
                     Sign in
                   </a>
@@ -343,7 +336,9 @@ const Header = (props) => {
       </Transition>
       
     </Popover>
-    {props.children}
+    <div className='bg-gray-200'>
+    <div className='min-h-screen p-2 max-w-7xl mx-auto'>{props.children}</div>
+    </div>
   </> 
   )
   
